@@ -58,18 +58,33 @@ Z1 = R1 + X1                # impedancia 1 do transformador
 
 Z2 = R2 + X2                # impedancia 2 do transformador
 
-#impedancias "shunt" dos transformadores
+#   impedancias "shunt" dos transformadores
+#   ZT = Rm + jXm
+
+#   Rm1 = 4320
+#   Xm1 = 5050
 ZT1 =  (4320 * 5050j) / (4320 + 5050j)
 
+#   Rm2 = 432000
+#   Xm2 = 505000
 ZT2 = (432000 * 505000j) / (432000 + 505000j)
 
+#   Rm3 = 402000
+#   Xm3 = 607000
 ZT3 = (402000 * 607000j) / (402000 + 607000j)
 
 #Cargas
+
+# R1 = 800ohm
+# L1 = 4.1H
 Zc1 = 800 + (1j* w * 4.1)
 
+# R2 = 135.55ohm
+# L2 = 0.83H
 Zc2 = 135.55 + (1j* w * 0.83)
 
+# R3 = 64.9ohm
+# L3 = 0.32H
 Zc3 = 64.9 + (1j * w * 0.32)
 
 #-=-=-=-=-=-=-=-=-=Modelos de Transmissao-=-=-=-=-=-=-=-=-=#
@@ -85,12 +100,16 @@ def TransformadorIdeal(N1,N2):
 
 def ImpedanciaSerie(Z):
 
+    # Matriz de impedancia
+
     matriz_Z = np.array([[ 1 , Z ],
                          [ 0 , 1 ]])
 
     return matriz_Z
 
 def AdmitanciaShunt(Y):
+
+    # Matriz de admitancia / Matriz inversa da impedancia
 
     matriz_Y = np.array([[ 1 , 0 ],
                          [ Y , 1 ]])
